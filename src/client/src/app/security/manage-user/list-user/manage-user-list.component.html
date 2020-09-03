@@ -1,0 +1,90 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Manage User</h1>
+</div>
+
+<!-- SEARCH FORM -->
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-search"></i> Search
+    </div>
+    <div class="card-body">
+        <form #searchForm="ngForm">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="title">Username</label>
+                        <input type="text" class="form-control" id="username" [(ngModel)]="search.username" name="username" #username="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Email</label>
+                        <input type="string" class="form-control" id="email" [(ngModel)]="search.email" name="email" #email="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">ProfileType</label>
+                        <input type="string" class="form-control" id="profiletype" [(ngModel)]="search.profiletype" name="profiletype" #profiletype="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">RegistrationStatus</label>
+                        <input type="boolean" class="form-control" id="registrationstatus" [(ngModel)]="search.registrationstatus" name="registrationstatus" #registrationstatus="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">RoleType</label>
+                        <input type="string" class="form-control" id="roletype" [(ngModel)]="search.roletype" name="roletype" #roletype="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">SubscriptionType</label>
+                        <input type="string" class="form-control" id="subscriptiontype" [(ngModel)]="search.subscriptiontype" name="subscriptiontype" #subscriptiontype="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">UserType</label>
+                        <input type="string" class="form-control" id="usertype" [(ngModel)]="search.usertype" name="usertype" #usertype="ngModel" reqired>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Role</label>
+                        <input type="text" class="form-control" id="role" [(ngModel)]="search.role" name="role" #role="ngModel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- TABLE LIST -->
+<table class="table table-hover mt-40">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>ProfileType</th>
+            <th>RegistrationStatus</th>
+            <th>RoleType</th>
+            <th>SubscriptionType</th>
+            <th>UserType</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | search:{'username' : search.username, 'name' : search.name, 'surname' : search.surname, 'mail' : search.mail, 'roles' : search.role }">
+            <td><a [routerLink]="['/manage-users/', user._id]">{{user.username}}</a></td>
+            <td>{{user.email }}</td>
+            <td>{{user.profiletype }}</td>
+            <td>{{user.registrationstatus }}</td>
+            <td>{{user.roletype }}</td>
+            <td>{{user.subscriptiontype }}</td>
+            <td>{{user.usertype }}</td>
+            <td>
+                <span *ngFor="let role of user.roles" class="badge badge-pill badge-primary mr-2">{{role}}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- BUTTON -->
+<button class="btn btn-primary text-center pull-right mb-20" routerLink="/manage-users/new">
+    <span>
+        <i class="fa fa-plus"></i>
+    </span>
+</button>

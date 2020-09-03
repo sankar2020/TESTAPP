@@ -1,0 +1,123 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>User List</h1>
+</div>
+
+<!-- SEARCH FORM -->
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-search"></i> Search
+    </div>
+    <div class="card-body">
+        <form #searchForm="ngForm">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" class="form-control" id="Email" [(ngModel)]="search.Email" name="Email" #Email="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="ProfileType">ProfileType</label>
+                        <input type="text" class="form-control" id="ProfileType" [(ngModel)]="search.ProfileType" name="ProfileType" #ProfileType="ngModel">
+                    </div>
+                    <div class="form-group ">
+                        <input type="checkbox" [(ngModel)]="search.RegistrationStatus" name="RegistrationStatus">
+                        <label>RegistrationStatus</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="RoleType">RoleType</label>
+                        <input type="text" class="form-control" id="RoleType" [(ngModel)]="search.RoleType" name="RoleType" #RoleType="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="SubscriptionType">SubscriptionType</label>
+                        <input type="text" class="form-control" id="SubscriptionType" [(ngModel)]="search.SubscriptionType" name="SubscriptionType" #SubscriptionType="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="UserType">UserType</label>
+                        <input type="text" class="form-control" id="UserType" [(ngModel)]="search.UserType" name="UserType" #UserType="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" [(ngModel)]="search.password" name="password" #password="ngModel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- TABLE -->
+<table class="table mt-40">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">ProfileType</th>
+            <th scope="col">RegistrationStatus</th>
+            <th scope="col">RoleType</th>
+            <th scope="col">SubscriptionType</th>
+            <th scope="col">UserType</th>
+            <th scope="col">password</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of list | search: { 'Email': search.Email, 'ProfileType': search.ProfileType, 'RegistrationStatus': search.RegistrationStatus, 'RoleType': search.RoleType, 'SubscriptionType': search.SubscriptionType, 'UserType': search.UserType, 'password': search.password }">
+            <!-- ATTRIBUTES -->
+            <td>
+                <a [routerLink]="['/users/', item._id]">{{item._id}}</a>
+            </td>
+            <td>{{item.Email }}</td>
+            <td>{{item.ProfileType }}</td>
+            <td>{{item.RegistrationStatus }}</td>
+            <td>{{item.RoleType }}</td>
+            <td>{{item.SubscriptionType }}</td>
+            <td>{{item.UserType }}</td>
+            <td>{{item.password }}</td>
+
+            <!-- DELETE BUTTON -->
+            <td>
+                <button class="btn btn-danger text-center" data-toggle="modal" data-target="#deleteModal" (click)="selectId(item._id)">
+                    <span>
+                        <i class="fa fa-trash"></i>
+                    </span>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    <div class="no-result" *ngIf="(list | search: {   'Email': search.Email ,  'ProfileType': search.ProfileType ,  'RegistrationStatus': search.RegistrationStatus ,  'RoleType': search.RoleType ,  'SubscriptionType': search.SubscriptionType ,  'UserType': search.UserType ,  'password': search.password  }).length == 0">
+        No items found
+    </div>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <i class="fa fa-times-circle"></i>&nbsp;&nbsp;Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want remove item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteItem()">YES</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUTTON -->
+<button class="btn btn-primary text-center pull-right mb-20" routerLink="/users/new">
+    <span>
+        <i class="fa fa-plus"></i>
+    </span>
+</button>
+
+<div class="clearfix"></div>

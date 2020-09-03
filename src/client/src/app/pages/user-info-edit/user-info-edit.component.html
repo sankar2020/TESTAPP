@@ -1,0 +1,53 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>UserInfo Edit</h1>
+</div>
+<div class="card mb-40">
+    <div class="card-header">
+        <i class="fa fa-edit"></i> Edit
+    </div>
+    <div class="card-body">
+        <form #editForm="ngForm" [ngClass]="{'was-validated': formValid!=null}">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="Address">Address *</label>
+                        <input type="text" class="form-control" id="Address" [(ngModel)]="item.Address" name="Address" #Address="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="Company">Company</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="Country">Country *</label>
+                        <input type="text" class="form-control" id="Country" [(ngModel)]="item.Country" name="Country" #Country="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Firstname">Firstname</label>
+                        <input type="text" class="form-control" id="Firstname" [(ngModel)]="item.Firstname" name="Firstname" #Firstname="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Lastname">Lastname *</label>
+                        <input type="text" class="form-control" id="Lastname" [(ngModel)]="item.Lastname" name="Lastname" #Lastname="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="WebsiteAddr">WebsiteAddr *</label>
+                        <input type="text" class="form-control" id="WebsiteAddr" [(ngModel)]="item.WebsiteAddr" name="WebsiteAddr" #WebsiteAddr="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+
+
+        
+
+                    <!-- BUTTON BAR -->
+                    <div class="mt-40">
+                        <button class="btn btn-primary pull-right" (click)="save(editForm.valid, item)">Save</button>
+                        <button class="btn btn-secondary pull-right mr-2" (click)="goBack()">Back To List</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
